@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+<title><a id="user-content-run_analysis" class="anchor" href="#run_analysis" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path></svg></a>run_analysis</title>
+
+<script type="text/javascript">
+window.onload = function() {
+  var imgs = document.getElementsByTagName('img'), i, img;
+  for (i = 0; i < imgs.length; i++) {
+    img = imgs[i];
+    // center an image if it is the only element of its parent
+    if (img.parentElement.childElementCount === 1)
+      img.parentElement.style.textAlign = 'center';
+  }
+};
+</script>
+
+
+
+
+
+<style type="text/css">
+body, td {
+   font-family: sans-serif;
+   background-color: white;
+   font-size: 13px;
+}
+
+body {
+  max-width: 800px;
+  margin: auto;
+  padding: 1em;
+  line-height: 20px;
+}
+
+tt, code, pre {
+   font-family: 'DejaVu Sans Mono', 'Droid Sans Mono', 'Lucida Console', Consolas, Monaco, monospace;
+}
+
+h1 {
+   font-size:2.2em;
+}
+
+h2 {
+   font-size:1.8em;
+}
+
+h3 {
+   font-size:1.4em;
+}
+
+h4 {
+   font-size:1.0em;
+}
+
+h5 {
+   font-size:0.9em;
+}
+
+h6 {
+   font-size:0.8em;
+}
+
+a:visited {
+   color: rgb(50%, 0%, 50%);
+}
+
+pre, img {
+  max-width: 100%;
+}
+pre {
+  overflow-x: auto;
+}
+pre code {
+   display: block; padding: 0.5em;
+}
+
+code {
+  font-size: 92%;
+  border: 1px solid #ccc;
+}
+
+code[class] {
+  background-color: #F8F8F8;
+}
+
+table, td, th {
+  border: none;
+}
+
+blockquote {
+   color:#666666;
+   margin:0;
+   padding-left: 1em;
+   border-left: 0.5em #EEE solid;
+}
+
+hr {
+   height: 0px;
+   border-bottom: none;
+   border-top-width: thin;
+   border-top-style: dotted;
+   border-top-color: #999999;
+}
+
+@media print {
+   * {
+      background: transparent !important;
+      color: black !important;
+      filter:none !important;
+      -ms-filter: none !important;
+   }
+
+   body {
+      font-size:12pt;
+      max-width:100%;
+   }
+
+   a, a:visited {
+      text-decoration: underline;
+   }
+
+   hr {
+      visibility: hidden;
+      page-break-before: always;
+   }
+
+   pre, blockquote {
+      padding-right: 1em;
+      page-break-inside: avoid;
+   }
+
+   tr, img {
+      page-break-inside: avoid;
+   }
+
+   img {
+      max-width: 100% !important;
+   }
+
+   @page :left {
+      margin: 15mm 20mm 15mm 10mm;
+   }
+
+   @page :right {
+      margin: 15mm 10mm 15mm 20mm;
+   }
+
+   p, h2, h3 {
+      orphans: 3; widows: 3;
+   }
+
+   h2, h3 {
+      page-break-after: avoid;
+   }
+}
+</style>
+
+
+
+</head>
+
+<body>
+<p>&lt;!DOCTYPE html&gt;
+<html lang="en" class=" is-copy-enabled">
+  <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# object: http://ogp.me/ns/object# article: http://ogp.me/ns/article# profile: http://ogp.me/ns/profile#">
+    <meta charset='utf-8'></p>
+
+<pre><code>&lt;link crossorigin=&quot;anonymous&quot; href=&quot;https://assets-cdn.github.com/assets/frameworks-486a2ba13121ca853388bbaabfb1482328e14fc6107d2c46137b73a1d2bfb9b7.css&quot; integrity=&quot;sha256-SGoroTEhyoUziLuqv7FIIyjhT8YQfSxGE3tzodK/ubc=&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; /&gt;
+&lt;link crossorigin=&quot;anonymous&quot; href=&quot;https://assets-cdn.github.com/assets/github-7bfc60854b4764664fc570a2846b56657937503994a19a5377bdc77f0a19b3f5.css&quot; integrity=&quot;sha256-e/xghUtHZGZPxXCihGtWZXk3UDmUoZpTd73HfwoZs/U=&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; /&gt;
+
+
+&lt;link crossorigin=&quot;anonymous&quot; href=&quot;https://assets-cdn.github.com/assets/site-d2013a78fb2b0b2d9afce49f4cf82965d3f075b6b021bf51aa28d8df766f2ba4.css&quot; integrity=&quot;sha256-0gE6ePsrCy2a/OSfTPgpZdPwdbawIb9RqijY33ZvK6Q=&quot; media=&quot;all&quot; rel=&quot;stylesheet&quot; /&gt;
+
+
+&lt;link as=&quot;script&quot; href=&quot;https://assets-cdn.github.com/assets/frameworks-e2eca2df0042931f550f59831b5d492c5c279682797c3131a99cd43c3f0917d3.js&quot; rel=&quot;preload&quot; /&gt;
+
+&lt;link as=&quot;script&quot; href=&quot;https://assets-cdn.github.com/assets/github-2e43b33c8410732a627bbaf05757eb3584ec9cf7a8747f46ccd2336a28223f60.js&quot; rel=&quot;preload&quot; /&gt;
+
+&lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;
+&lt;meta http-equiv=&quot;Content-Language&quot; content=&quot;en&quot;&gt;
+&lt;meta name=&quot;viewport&quot; content=&quot;width=1020&quot;&gt;
+
+
+&lt;title&gt;GettingAndCleaningData/run_analysis.Rmd at master Â· benjamin-chan/GettingAndCleaningData Â· GitHub&lt;/title&gt;
+&lt;link rel=&quot;search&quot; type=&quot;application/opensearchdescription+xml&quot; href=&quot;/opensearch.xml&quot; title=&quot;GitHub&quot;&gt;
+&lt;link rel=&quot;fluid-icon&quot; href=&quot;https://github.com/fluidicon.png&quot; title=&quot;GitHub&quot;&gt;
+&lt;link rel=&quot;apple-touch-icon&quot; href=&quot;/apple-touch-icon.png&quot;&gt;
+&lt;link rel=&quot;apple-touch-icon&quot; sizes=&quot;57x57&quot; href=&quot;/apple-touch-icon-57x57.png&quot;&gt;
+&lt;link rel=&quot;apple-touch-icon&quot; sizes=&quot;60x60&quot; href=&quot;/apple-touch-icon-60x60.png&quot;&gt;
+&lt;link rel=&quot;apple-touch-icon&quot; sizes=&quot;72x72&quot; href=&quot;/apple-touch-icon-72x72.png&quot;&gt;
+&lt;link rel=&quot;apple-touch-icon&quot; sizes=&quot;76x76&quot; href=&quot;/apple-touch-icon-76x76.png&quot;&gt;
+&lt;link rel=&quot;apple-touch-icon&quot; sizes=&quot;114x114&quot; href=&quot;/apple-touch-icon-114x114.png&quot;&gt;
+&lt;link rel=&quot;apple-touch-icon&quot; sizes=&quot;120x120&quot; href=&quot;/apple-touch-icon-120x120.png&quot;&gt;
+&lt;link rel=&quot;apple-touch-icon&quot; sizes=&quot;144x144&quot; href=&quot;/apple-touch-icon-144x144.png&quot;&gt;
+&lt;link rel=&quot;apple-touch-icon&quot; sizes=&quot;152x152&quot; href=&quot;/apple-touch-icon-152x152.png&quot;&gt;
+&lt;link rel=&quot;apple-touch-icon&quot; sizes=&quot;180x180&quot; href=&quot;/apple-touch-icon-180x180.png&quot;&gt;
+&lt;meta property=&quot;fb:app_id&quot; content=&quot;1401488693436528&quot;&gt;
+
+  &lt;meta content=&quot;https://avatars1.githubusercontent.com/u/1897044?v=3&amp;amp;s=400&quot; name=&quot;twitter:image:src&quot; /&gt;&lt;meta content=&quot;@github&quot; name=&quot;twitter:site&quot; /&gt;&lt;meta content=&quot;summary&quot; name=&quot;twitter:card&quot; /&gt;&lt;meta content=&quot;benjamin-chan/GettingAndCleaningData&quot; name=&quot;twitter:title&quot; /&gt;&lt;meta content=&quot;GettingAndCleaningData - Repository for Coursera course Getting and Cleaning Data.&quot; name=&quot;twitter:description&quot; /&gt;
+  &lt;meta content=&quot;https://avatars1.githubusercontent.com/u/1897044?v=3&amp;amp;s=400&quot; property=&quot;og:image&quot; /&gt;&lt;meta content=&quot;GitHub&quot; property=&quot;og:site_name&quot; /&gt;&lt;meta content=&quot;object&quot; property=&quot;og:type&quot; /&gt;&lt;meta content=&quot;benjamin-chan/GettingAndCleaningData&quot; property=&quot;og:title&quot; /&gt;&lt;meta content=&quot;https://github.com/benjamin-chan/GettingAndCleaningData&quot; property=&quot;og:url&quot; /&gt;&lt;meta content=&quot;GettingAndCleaningData - Repository for Coursera course Getting and Cleaning Data.&quot; property=&quot;og:description&quot; /&gt;
+  &lt;meta name=&quot;browser-stats-url&quot; content=&quot;https://api.github.com/_private/browser/stats&quot;&gt;
+&lt;meta name=&quot;browser-errors-url&quot; content=&quot;https://api.github.com/_private/browser/errors&quot;&gt;
+&lt;link rel=&quot;assets&quot; href=&quot;https://assets-cdn.github.com/&quot;&gt;
+
+&lt;meta name=&quot;pjax-timeout&quot; content=&quot;1000&quot;&gt;
+
+
+&lt;meta name=&quot;msapplication-TileImage&quot; content=&quot;/windows-tile.png&quot;&gt;
+&lt;meta name=&quot;msapplication-TileColor&quot; content=&quot;#ffffff&quot;&gt;
+&lt;meta name=&quot;selected-link&quot; value=&quot;repo_source&quot; data-pjax-transient&gt;
+
+&lt;meta name=&quot;google-site-verification&quot; content=&quot;KT5gs8h0wvaagLKAVWq8bbeNwnZZK1r1XQysX3xurLU&quot;&gt;
+</code></pre>
+
+<p><meta name="google-site-verification" content="ZzhVyEFwb7w3e0-uOTltm8Jsck2F5StVihD0exw2fsA">
+    <meta name="google-analytics" content="UA-3769691-2"></p>
+
+<p><meta content="collector.githubapp.com" name="octolytics-host" /><meta content="github" name="octolytics-app-id" /><meta content="48B58E47:90F3:236B243:572B026A" name="octolytics-dimension-request_id" />
+<meta content="/&lt;user-name&gt;/&lt;repo-name&gt;/blob/show" data-pjax-transient="true" name="analytics-location" /></p>
+
+<p><meta class="js-ga-set" name="dimension1" content="Logged Out"></p>
+
+<pre><code>    &lt;meta name=&quot;hostname&quot; content=&quot;github.com&quot;&gt;
+&lt;meta name=&quot;user-login&quot; content=&quot;&quot;&gt;
+
+    &lt;meta name=&quot;expected-hostname&quot; content=&quot;github.com&quot;&gt;
+  &lt;meta name=&quot;js-proxy-site-detection-payload&quot; content=&quot;OGZkNWQ4NjkwMGNmOTQ2NWQyY2QxOGViNzE0YmZlNGM1Zjg3ZTBlZDQ1NjA5MGQ1ZGQ4NzkxMWI1YmE4YWI0OXx7InJlbW90ZV9hZGRyZXNzIjoiNzIuMTgxLjE0Mi43MSIsInJlcXVlc3RfaWQiOiI0OEI1OEU0Nzo5MEYzOjIzNkIyNDM6NTcyQjAyNkEiLCJ0aW1lc3RhbXAiOjE0NjI0MzY0NTh9&quot;&gt;
+
+
+  &lt;link rel=&quot;mask-icon&quot; href=&quot;https://assets-cdn.github.com/pinned-octocat.svg&quot; color=&quot;#4078c0&quot;&gt;
+  &lt;link rel=&quot;icon&quot; type=&quot;image/x-icon&quot; href=&quot;https://assets-cdn.github.com/favicon.ico&quot;&gt;
+
+&lt;meta content=&quot;9cb96e1a5364562890d55471e7d65f206fddf2c1&quot; name=&quot;form-nonce&quot; /&gt;
+
+&lt;meta http-equiv=&quot;x-pjax-version&quot; content=&quot;f9f8c8670e41714c29ab3aa04adcb3c4&quot;&gt;
+</code></pre>
+
+<p><meta name="description" content="GettingAndCleaningData - Repository for Coursera course Getting and Cleaning Data.">
+  <meta name="go-import" content="github.com/benjamin-chan/GettingAndCleaningData git https://github.com/benjamin-chan/GettingAndCleaningData.git"></p>
+
+<p><meta content="1897044" name="octolytics-dimension-user_id" /><meta content="benjamin-chan" name="octolytics-dimension-user_login" /><meta content="18577753" name="octolytics-dimension-repository_id" /><meta content="benjamin-chan/GettingAndCleaningData" name="octolytics-dimension-repository_nwo" /><meta content="true" name="octolytics-dimension-repository_public" /><meta content="false" name="octolytics-dimension-repository_is_fork" /><meta content="18577753" name="octolytics-dimension-repository_network_root_id" /><meta content="benjamin-chan/GettingAndCleaningData" name="octolytics-dimension-repository_network_root_nwo" />
+  <link href="https://github.com/benjamin-chan/GettingAndCleaningData/commits/master.atom" rel="alternate" title="Recent Commits to GettingAndCleaningData:master" type="application/atom+xml"></p>
+
+<pre><code>  &lt;link rel=&quot;canonical&quot; href=&quot;https://github.com/benjamin-chan/GettingAndCleaningData/blob/master/Project/run_analysis.Rmd&quot; data-pjax-transient&gt;
+</code></pre>
+
+<p></head></p>
+
+<p><body class="logged-out   env-production windows vis-public page-blob">
+    <div id="js-pjax-loader-bar" class="pjax-loader-bar"></div>
+    <a href="#start-of-content" tabindex="1" class="accessibility-aid js-skip-to-content">Skip to content</a></p>
+
+<pre><code>      &lt;header class=&quot;site-header js-details-container&quot; role=&quot;banner&quot;&gt;
+</code></pre>
+
+<p><div class="container-responsive">
+    <a class="header-logo-invertocat" href="https://github.com/" aria-label="Homepage" data-ga-click="(Logged out) Header, go to homepage, icon:logo-wordmark">
+      <svg aria-hidden="true" class="octicon octicon-mark-github" height="32" version="1.1" viewBox="0 0 16 16" width="32"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59 0.4 0.07 0.55-0.17 0.55-0.38 0-0.19-0.01-0.82-0.01-1.49-2.01 0.37-2.53-0.49-2.69-0.94-0.09-0.23-0.48-0.94-0.82-1.13-0.28-0.15-0.68-0.52-0.01-0.53 0.63-0.01 1.08 0.58 1.23 0.82 0.72 1.21 1.87 0.87 2.33 0.66 0.07-0.52 0.28-0.87 0.51-1.07-1.78-0.2-3.64-0.89-3.64-3.95 0-0.87 0.31-1.59 0.82-2.15-0.08-0.2-0.36-1.02 0.08-2.12 0 0 0.67-0.21 2.2 0.82 0.64-0.18 1.32-0.27 2-0.27 0.68 0 1.36 0.09 2 0.27 1.53-1.04 2.2-0.82 2.2-0.82 0.44 1.1 0.16 1.92 0.08 2.12 0.51 0.56 0.82 1.27 0.82 2.15 0 3.07-1.87 3.75-3.65 3.95 0.29 0.25 0.54 0.73 0.54 1.48 0 1.07-0.01 1.93-0.01 2.2 0 0.21 0.15 0.46 0.55 0.38C13.71 14.53 16 11.53 16 8 16 3.58 12.42 0 8 0z"></path></svg>
+    </a></p>
+
+<pre><code>&lt;button class=&quot;btn-link right site-header-toggle js-details-target&quot; type=&quot;button&quot; aria-label=&quot;Toggle navigation&quot;&gt;
+  &lt;svg aria-hidden=&quot;true&quot; class=&quot;octicon octicon-three-bars&quot; height=&quot;24&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 12 16&quot; width=&quot;18&quot;&gt;&lt;path d=&quot;M11.41 9H0.59c-0.59 0-0.59-0.41-0.59-1s0-1 0.59-1h10.81c0.59 0 0.59 0.41 0.59 1s0 1-0.59 1z m0-4H0.59c-0.59 0-0.59-0.41-0.59-1s0-1 0.59-1h10.81c0.59 0 0.59 0.41 0.59 1s0 1-0.59 1zM0.59 11h10.81c0.59 0 0.59 0.41 0.59 1s0 1-0.59 1H0.59c-0.59 0-0.59-0.41-0.59-1s0-1 0.59-1z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;
+&lt;/button&gt;
+
+&lt;div class=&quot;site-header-menu&quot;&gt;
+  &lt;nav class=&quot;site-header-nav site-header-nav-main&quot;&gt;
+    &lt;a href=&quot;/personal&quot; class=&quot;js-selected-navigation-item nav-item nav-item-personal&quot; data-ga-click=&quot;Header, click, Nav menu - item:personal&quot; data-selected-links=&quot;/personal /personal&quot;&gt;
+      Personal
+</code></pre>
+
+<p></a>        <a href="/open-source" class="js-selected-navigation-item nav-item nav-item-opensource" data-ga-click="Header, click, Nav menu - item:opensource" data-selected-links="/open-source /open-source">
+          Open source
+</a>        <a href="/business" class="js-selected-navigation-item nav-item nav-item-business" data-ga-click="Header, click, Nav menu - item:business" data-selected-links="/business /business/features /business/customers /business">
+          Business
+</a>        <a href="/explore" class="js-selected-navigation-item nav-item nav-item-explore" data-ga-click="Header, click, Nav menu - item:explore" data-selected-links="/explore /trending /trending/developers /integrations /integrations/feature/code /integrations/feature/collaborate /integrations/feature/ship /explore">
+          Explore
+</a>      </nav></p>
+
+<pre><code>  &lt;div class=&quot;site-header-actions&quot;&gt;
+        &lt;a class=&quot;btn btn-primary site-header-actions-btn&quot; href=&quot;/join?source=header-repo&quot; data-ga-click=&quot;(Logged out) Header, clicked Sign up, text:sign-up&quot;&gt;Sign up&lt;/a&gt;
+      &lt;a class=&quot;btn site-header-actions-btn mr-2&quot; href=&quot;/login?return_to=%2Fbenjamin-chan%2FGettingAndCleaningData%2Fblob%2Fmaster%2FProject%2Frun_analysis.Rmd&quot; data-ga-click=&quot;(Logged out) Header, clicked Sign in, text:sign-in&quot;&gt;Sign in&lt;/a&gt;
+  &lt;/div&gt;
+
+    &lt;nav class=&quot;site-header-nav site-header-nav-secondary&quot;&gt;
+      &lt;a class=&quot;nav-item&quot; href=&quot;/pricing&quot;&gt;Pricing&lt;/a&gt;
+      &lt;a class=&quot;nav-item&quot; href=&quot;/blog&quot;&gt;Blog&lt;/a&gt;
+      &lt;a class=&quot;nav-item&quot; href=&quot;https://help.github.com&quot;&gt;Support&lt;/a&gt;
+      &lt;a class=&quot;nav-item header-search-link&quot; href=&quot;https://github.com/search&quot;&gt;Search GitHub&lt;/a&gt;
+          &lt;div class=&quot;header-search scoped-search site-scoped-search js-site-search&quot; role=&quot;search&quot;&gt;
+</code></pre>
+
+<p>&lt;!&ndash; </textarea> &ndash;&gt;&lt;!&ndash; &#39;&ldquo; &ndash;&gt;<form accept-charset="UTF-8" action="/benjamin-chan/GettingAndCleaningData/search" class="js-site-search-form" data-scoped-search-url="/benjamin-chan/GettingAndCleaningData/search" data-unscoped-search-url="/search" method="get"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /></div>
+    <label class="form-control header-search-wrapper js-chromeless-input-container">
+      <div class="header-search-scope">This repository</div>
+      <input type="text"
+        class="form-control header-search-input js-site-search-focus js-site-search-field is-clearable"
+        data-hotkey="s"
+        name="q"
+        placeholder="Search"
+        aria-label="Search this repository"
+        data-unscoped-placeholder="Search GitHub"
+        data-scoped-placeholder="Search"
+        tabindex="1"
+        autocapitalize="off">
+    </label>
+</form></div></p>
+
+<pre><code>    &lt;/nav&gt;
+&lt;/div&gt;
+</code></pre>
+
+<p></div>
+</header></p>
+
+<pre><code>&lt;div id=&quot;start-of-content&quot; class=&quot;accessibility-aid&quot;&gt;&lt;/div&gt;
+
+  &lt;div id=&quot;js-flash-container&quot;&gt;
+</code></pre>
+
+<p></div></p>
+
+<pre><code>&lt;div role=&quot;main&quot; class=&quot;main-content&quot;&gt;
+    &lt;div itemscope itemtype=&quot;http://schema.org/SoftwareSourceCode&quot;&gt;
+&lt;div id=&quot;js-repo-pjax-container&quot; data-pjax-container&gt;
+</code></pre>
+
+<div class="pagehead repohead instapaper_ignore readability-menu experiment-repo-nav">
+  <div class="container repohead-details-container">
+
+    
+
+<ul class="pagehead-actions">
+
+  <li>
+      <a href="/login?return_to=%2Fbenjamin-chan%2FGettingAndCleaningData"
+    class="btn btn-sm btn-with-count tooltipped tooltipped-n"
+    aria-label="You must be signed in to watch a repository" rel="nofollow">
+    <svg aria-hidden="true" class="octicon octicon-eye" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path d="M8.06 2C3 2 0 8 0 8s3 6 8.06 6c4.94 0 7.94-6 7.94-6S13 2 8.06 2z m-0.06 10c-2.2 0-4-1.78-4-4 0-2.2 1.8-4 4-4 2.22 0 4 1.8 4 4 0 2.22-1.78 4-4 4z m2-4c0 1.11-0.89 2-2 2s-2-0.89-2-2 0.89-2 2-2 2 0.89 2 2z"></path></svg>
+    Watch
+  </a>
+  <a class="social-count" href="/benjamin-chan/GettingAndCleaningData/watchers">
+    14
+  </a>
+
+  </li>
+
+  <li>
+      <a href="/login?return_to=%2Fbenjamin-chan%2FGettingAndCleaningData"
+    class="btn btn-sm btn-with-count tooltipped tooltipped-n"
+    aria-label="You must be signed in to star a repository" rel="nofollow">
+    <svg aria-hidden="true" class="octicon octicon-star" height="16" version="1.1" viewBox="0 0 14 16" width="14"><path d="M14 6l-4.9-0.64L7 1 4.9 5.36 0 6l3.6 3.26L2.67 14l4.33-2.33 4.33 2.33L10.4 9.26 14 6z"></path></svg>
+    Star
+  </a>
+
+    <a class="social-count js-social-count" href="/benjamin-chan/GettingAndCleaningData/stargazers">
+      46
+    </a>
+
+  </li>
+
+  <li>
+      <a href="/login?return_to=%2Fbenjamin-chan%2FGettingAndCleaningData"
+        class="btn btn-sm btn-with-count tooltipped tooltipped-n"
+        aria-label="You must be signed in to fork a repository" rel="nofollow">
+        <svg aria-hidden="true" class="octicon octicon-repo-forked" height="16" version="1.1" viewBox="0 0 10 16" width="10"><path d="M8 1c-1.11 0-2 0.89-2 2 0 0.73 0.41 1.38 1 1.72v1.28L5 8 3 6v-1.28c0.59-0.34 1-0.98 1-1.72 0-1.11-0.89-2-2-2S0 1.89 0 3c0 0.73 0.41 1.38 1 1.72v1.78l3 3v1.78c-0.59 0.34-1 0.98-1 1.72 0 1.11 0.89 2 2 2s2-0.89 2-2c0-0.73-0.41-1.38-1-1.72V9.5l3-3V4.72c0.59-0.34 1-0.98 1-1.72 0-1.11-0.89-2-2-2zM2 4.2c-0.66 0-1.2-0.55-1.2-1.2s0.55-1.2 1.2-1.2 1.2 0.55 1.2 1.2-0.55 1.2-1.2 1.2z m3 10c-0.66 0-1.2-0.55-1.2-1.2s0.55-1.2 1.2-1.2 1.2 0.55 1.2 1.2-0.55 1.2-1.2 1.2z m3-10c-0.66 0-1.2-0.55-1.2-1.2s0.55-1.2 1.2-1.2 1.2 0.55 1.2 1.2-0.55 1.2-1.2 1.2z"></path></svg>
+        Fork
+      </a>
+
+    <a href="/benjamin-chan/GettingAndCleaningData/network" class="social-count">
+      282
+    </a>
+  </li>
+</ul>
+
+    <h1 class="entry-title public ">
+  <svg aria-hidden="true" class="octicon octicon-repo" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path d="M4 9h-1v-1h1v1z m0-3h-1v1h1v-1z m0-2h-1v1h1v-1z m0-2h-1v1h1v-1z m8-1v12c0 0.55-0.45 1-1 1H6v2l-1.5-1.5-1.5 1.5V14H1c-0.55 0-1-0.45-1-1V1C0 0.45 0.45 0 1 0h10c0.55 0 1 0.45 1 1z m-1 10H1v2h2v-1h3v1h5V11z m0-10H2v9h9V1z"></path></svg>
+  <span class="author" itemprop="author"><a href="/benjamin-chan" class="url fn" rel="author">benjamin-chan</a></span><!--
+--><span class="path-divider">/</span><!--
+--><strong itemprop="name"><a href="/benjamin-chan/GettingAndCleaningData" data-pjax="#js-repo-pjax-container">GettingAndCleaningData</a></strong>
+
+</h1>
+
+  </div>
+  <div class="container">
+    
+<nav class="reponav js-repo-nav js-sidenav-container-pjax"
+     itemscope
+     itemtype="http://schema.org/BreadcrumbList"
+     role="navigation"
+     data-pjax="#js-repo-pjax-container">
+
+  <span itemscope itemtype="http://schema.org/ListItem" itemprop="itemListElement">
+    <a href="/benjamin-chan/GettingAndCleaningData" aria-selected="true" class="js-selected-navigation-item selected reponav-item" data-hotkey="g c" data-selected-links="repo_source repo_downloads repo_commits repo_releases repo_tags repo_branches /benjamin-chan/GettingAndCleaningData" itemprop="url">
+      <svg aria-hidden="true" class="octicon octicon-code" height="16" version="1.1" viewBox="0 0 14 16" width="14"><path d="M9.5 3l-1.5 1.5 3.5 3.5L8 11.5l1.5 1.5 4.5-5L9.5 3zM4.5 3L0 8l4.5 5 1.5-1.5L2.5 8l3.5-3.5L4.5 3z"></path></svg>
+      <span itemprop="name">Code</span>
+      <meta itemprop="position" content="1">
+</a>  </span>
+
+    <span itemscope itemtype="http://schema.org/ListItem" itemprop="itemListElement">
+      <a href="/benjamin-chan/GettingAndCleaningData/issues" class="js-selected-navigation-item reponav-item" data-hotkey="g i" data-selected-links="repo_issues repo_labels repo_milestones /benjamin-chan/GettingAndCleaningData/issues" itemprop="url">
+        <svg aria-hidden="true" class="octicon octicon-issue-opened" height="16" version="1.1" viewBox="0 0 14 16" width="14"><path d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7S10.14 13.7 7 13.7 1.3 11.14 1.3 8s2.56-5.7 5.7-5.7m0-1.3C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7S10.86 1 7 1z m1 3H6v5h2V4z m0 6H6v2h2V10z"></path></svg>
+        <span itemprop="name">Issues</span>
+        <span class="counter">0</span>
+        <meta itemprop="position" content="2">
+</a>    </span>
+
+  <span itemscope itemtype="http://schema.org/ListItem" itemprop="itemListElement">
+    <a href="/benjamin-chan/GettingAndCleaningData/pulls" class="js-selected-navigation-item reponav-item" data-hotkey="g p" data-selected-links="repo_pulls /benjamin-chan/GettingAndCleaningData/pulls" itemprop="url">
+      <svg aria-hidden="true" class="octicon octicon-git-pull-request" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path d="M11 11.28c0-1.73 0-6.28 0-6.28-0.03-0.78-0.34-1.47-0.94-2.06s-1.28-0.91-2.06-0.94c0 0-1.02 0-1 0V0L4 3l3 3V4h1c0.27 0.02 0.48 0.11 0.69 0.31s0.3 0.42 0.31 0.69v6.28c-0.59 0.34-1 0.98-1 1.72 0 1.11 0.89 2 2 2s2-0.89 2-2c0-0.73-0.41-1.38-1-1.72z m-1 2.92c-0.66 0-1.2-0.55-1.2-1.2s0.55-1.2 1.2-1.2 1.2 0.55 1.2 1.2-0.55 1.2-1.2 1.2zM4 3c0-1.11-0.89-2-2-2S0 1.89 0 3c0 0.73 0.41 1.38 1 1.72 0 1.55 0 5.56 0 6.56-0.59 0.34-1 0.98-1 1.72 0 1.11 0.89 2 2 2s2-0.89 2-2c0-0.73-0.41-1.38-1-1.72V4.72c0.59-0.34 1-0.98 1-1.72z m-0.8 10c0 0.66-0.55 1.2-1.2 1.2s-1.2-0.55-1.2-1.2 0.55-1.2 1.2-1.2 1.2 0.55 1.2 1.2z m-1.2-8.8c-0.66 0-1.2-0.55-1.2-1.2s0.55-1.2 1.2-1.2 1.2 0.55 1.2 1.2-0.55 1.2-1.2 1.2z"></path></svg>
+      <span itemprop="name">Pull requests</span>
+      <span class="counter">0</span>
+      <meta itemprop="position" content="3">
+</a>  </span>
+
+
+
+  <a href="/benjamin-chan/GettingAndCleaningData/pulse" class="js-selected-navigation-item reponav-item" data-selected-links="pulse /benjamin-chan/GettingAndCleaningData/pulse">
+    <svg aria-hidden="true" class="octicon octicon-pulse" height="16" version="1.1" viewBox="0 0 14 16" width="14"><path d="M11.5 8L8.8 5.4 6.6 8.5 5.5 1.6 2.38 8H0V10h3.6L4.5 8.2l0.9 5.4L9 8.5l1.6 1.5H14V8H11.5z"></path></svg>
+    Pulse
+</a>
+  <a href="/benjamin-chan/GettingAndCleaningData/graphs" class="js-selected-navigation-item reponav-item" data-selected-links="repo_graphs repo_contributors /benjamin-chan/GettingAndCleaningData/graphs">
+    <svg aria-hidden="true" class="octicon octicon-graph" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path d="M16 14v1H0V0h1v14h15z m-11-1H3V8h2v5z m4 0H7V3h2v10z m4 0H11V6h2v7z"></path></svg>
+    Graphs
+</a>
+
+</nav>
+
+  </div>
+</div>
+
+<div class="container new-discussion-timeline experiment-repo-nav">
+  <div class="repository-content">
+
+    
+
+<a href="/benjamin-chan/GettingAndCleaningData/blob/eb401a34579a545bc64fedd8d410bdf8ecb6f992/Project/run_analysis.Rmd" class="hidden js-permalink-shortcut" data-hotkey="y">Permalink</a>
+
+<!-- blob contrib key: blob_contributors:v21:6db8e64c1291e150fb1f7e559b7434d9 -->
+
+<div class="file-navigation js-zeroclipboard-container">
+  
+<div class="select-menu branch-select-menu js-menu-container js-select-menu left">
+  <button class="btn btn-sm select-menu-button js-menu-target css-truncate" data-hotkey="w"
+    title="master"
+    type="button" aria-label="Switch branches or tags" tabindex="0" aria-haspopup="true">
+    <i>Branch:</i>
+    <span class="js-select-button css-truncate-target">master</span>
+  </button>
+
+  <div class="select-menu-modal-holder js-menu-content js-navigation-container" data-pjax aria-hidden="true">
+
+    <div class="select-menu-modal">
+      <div class="select-menu-header">
+        <svg aria-label="Close" class="octicon octicon-x js-menu-close" height="16" role="img" version="1.1" viewBox="0 0 12 16" width="12"><path d="M7.48 8l3.75 3.75-1.48 1.48-3.75-3.75-3.75 3.75-1.48-1.48 3.75-3.75L0.77 4.25l1.48-1.48 3.75 3.75 3.75-3.75 1.48 1.48-3.75 3.75z"></path></svg>
+        <span class="select-menu-title">Switch branches/tags</span>
+      </div>
+
+      <div class="select-menu-filters">
+        <div class="select-menu-text-filter">
+          <input type="text" aria-label="Filter branches/tags" id="context-commitish-filter-field" class="form-control js-filterable-field js-navigation-enable" placeholder="Filter branches/tags">
+        </div>
+        <div class="select-menu-tabs">
+          <ul>
+            <li class="select-menu-tab">
+              <a href="#" data-tab-filter="branches" data-filter-placeholder="Filter branches/tags" class="js-select-menu-tab" role="tab">Branches</a>
+            </li>
+            <li class="select-menu-tab">
+              <a href="#" data-tab-filter="tags" data-filter-placeholder="Find a tagâ€¦" class="js-select-menu-tab" role="tab">Tags</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="select-menu-list select-menu-tab-bucket js-select-menu-tab-bucket" data-tab-filter="branches" role="menu">
+
+        <div data-filterable-for="context-commitish-filter-field" data-filterable-type="substring">
+
+
+            <a class="select-menu-item js-navigation-item js-navigation-open selected"
+               href="/benjamin-chan/GettingAndCleaningData/blob/master/Project/run_analysis.Rmd"
+               data-name="master"
+               data-skip-pjax="true"
+               rel="nofollow">
+              <svg aria-hidden="true" class="octicon octicon-check select-menu-item-icon" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path d="M12 5L4 13 0 9l1.5-1.5 2.5 2.5 6.5-6.5 1.5 1.5z"></path></svg>
+              <span class="select-menu-item-text css-truncate-target js-select-menu-filter-text" title="master">
+                master
+              </span>
+            </a>
+        </div>
+
+          <div class="select-menu-no-results">Nothing to show</div>
+      </div>
+
+      <div class="select-menu-list select-menu-tab-bucket js-select-menu-tab-bucket" data-tab-filter="tags">
+        <div data-filterable-for="context-commitish-filter-field" data-filterable-type="substring">
+
+
+        </div>
+
+        <div class="select-menu-no-results">Nothing to show</div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<p><div class="btn-group right">
+    <a href="/benjamin-chan/GettingAndCleaningData/find/master"
+          class="js-pjax-capture-input btn btn-sm"
+          data-pjax
+          data-hotkey="t">
+      Find file
+    </a>
+    <button aria-label="Copy file path to clipboard" class="js-zeroclipboard btn btn-sm zeroclipboard-button tooltipped tooltipped-s" data-copied-hint="Copied!" type="button">Copy path</button>
+  </div>
+  <div class="breadcrumb js-zeroclipboard-target">
+    <span class="repo-root js-repo-root"><span class="js-path-segment"><a href="/benjamin-chan/GettingAndCleaningData"><span>GettingAndCleaningData</span></a></span></span><span class="separator">/</span><span class="js-path-segment"><a href="/benjamin-chan/GettingAndCleaningData/tree/master/Project"><span>Project</span></a></span><span class="separator">/</span><strong class="final-path">run_analysis.Rmd</strong>
+  </div>
+</div></p>
+
+<p><div class="commit-tease">
+      <span class="right">
+        <a class="commit-tease-sha" href="/benjamin-chan/GettingAndCleaningData/commit/73f0abb7e5bd770a824ee189e21830c7485c5f1a" data-pjax>
+          73f0abb
+        </a>
+        <relative-time datetime="2014-04-17T16:10:14Z">Apr 17, 2014</relative-time>
+      </span>
+      <div>
+        <img alt="@benjamin-chan" class="avatar" height="20" src="https://avatars1.githubusercontent.com/u/1897044?v=3&amp;s=40" width="20" />
+        <a href="/benjamin-chan" class="user-mention" rel="author">benjamin-chan</a>
+          <a href="/benjamin-chan/GettingAndCleaningData/commit/73f0abb7e5bd770a824ee189e21830c7485c5f1a" class="message" data-pjax="true" title="Add codebook.html">Add codebook.html</a>
+      </div></p>
+
+<pre><code>&lt;div class=&quot;commit-tease-contributors&quot;&gt;
+  &lt;button type=&quot;button&quot; class=&quot;btn-link muted-link contributors-toggle&quot; data-facebox=&quot;#blob_contributors_box&quot;&gt;
+    &lt;strong&gt;1&lt;/strong&gt;
+     contributor
+  &lt;/button&gt;
+
+&lt;/div&gt;
+
+&lt;div id=&quot;blob_contributors_box&quot; style=&quot;display:none&quot;&gt;
+  &lt;h2 class=&quot;facebox-header&quot; data-facebox-id=&quot;facebox-header&quot;&gt;Users who have contributed to this file&lt;/h2&gt;
+  &lt;ul class=&quot;facebox-user-list&quot; data-facebox-id=&quot;facebox-description&quot;&gt;
+      &lt;li class=&quot;facebox-user-list-item&quot;&gt;
+        &lt;img alt=&quot;@benjamin-chan&quot; height=&quot;24&quot; src=&quot;https://avatars3.githubusercontent.com/u/1897044?v=3&amp;amp;s=48&quot; width=&quot;24&quot; /&gt;
+        &lt;a href=&quot;/benjamin-chan&quot;&gt;benjamin-chan&lt;/a&gt;
+      &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
+</code></pre>
+
+<p></div></p>
+
+<div class="file">
+  <div class="file-header">
+  <div class="file-actions">
+
+    <div class="btn-group">
+      <a href="/benjamin-chan/GettingAndCleaningData/raw/master/Project/run_analysis.Rmd" class="btn btn-sm " id="raw-url">Raw</a>
+        <a href="/benjamin-chan/GettingAndCleaningData/blame/master/Project/run_analysis.Rmd" class="btn btn-sm js-update-url-with-hash">Blame</a>
+      <a href="/benjamin-chan/GettingAndCleaningData/commits/master/Project/run_analysis.Rmd" class="btn btn-sm " rel="nofollow">History</a>
+    </div>
+
+        <a class="btn-octicon tooltipped tooltipped-nw"
+           href="https://windows.github.com"
+           aria-label="Open this file in GitHub Desktop"
+           data-ga-click="Repository, open with desktop, type:windows">
+            <svg aria-hidden="true" class="octicon octicon-device-desktop" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path d="M15 2H1c-0.55 0-1 0.45-1 1v9c0 0.55 0.45 1 1 1h5.34c-0.25 0.61-0.86 1.39-2.34 2h8c-1.48-0.61-2.09-1.39-2.34-2h5.34c0.55 0 1-0.45 1-1V3c0-0.55-0.45-1-1-1z m0 9H1V3h14v8z"></path></svg>
+        </a>
+
+        <button type="button" class="btn-octicon disabled tooltipped tooltipped-nw"
+          aria-label="You must be signed in to make or propose changes">
+          <svg aria-hidden="true" class="octicon octicon-pencil" height="16" version="1.1" viewBox="0 0 14 16" width="14"><path d="M0 12v3h3l8-8-3-3L0 12z m3 2H1V12h1v1h1v1z m10.3-9.3l-1.3 1.3-3-3 1.3-1.3c0.39-0.39 1.02-0.39 1.41 0l1.59 1.59c0.39 0.39 0.39 1.02 0 1.41z"></path></svg>
+        </button>
+        <button type="button" class="btn-octicon btn-octicon-danger disabled tooltipped tooltipped-nw"
+          aria-label="You must be signed in to make or propose changes">
+          <svg aria-hidden="true" class="octicon octicon-trashcan" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path d="M10 2H8c0-0.55-0.45-1-1-1H4c-0.55 0-1 0.45-1 1H1c-0.55 0-1 0.45-1 1v1c0 0.55 0.45 1 1 1v9c0 0.55 0.45 1 1 1h7c0.55 0 1-0.45 1-1V5c0.55 0 1-0.45 1-1v-1c0-0.55-0.45-1-1-1z m-1 12H2V5h1v8h1V5h1v8h1V5h1v8h1V5h1v9z m1-10H1v-1h9v1z"></path></svg>
+        </button>
+  </div>
+
+  <div class="file-info">
+      272 lines (197 sloc)
+      <span class="file-info-divider"></span>
+    8.72 KB
+  </div>
+</div>
+
+<p><div id="readme" class="readme blob instapaper_body">
+    <article class="markdown-body entry-content" itemprop="text"><h1><a id="user-content-run_analysis" class="anchor" href="#run_analysis" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path></svg></a>run_analysis</h1></p>
+
+<p>Last updated <code>r as.character(Sys.time())</code> using <code>r R.version$version.string</code>.</p>
+
+<h2><a id="user-content-instructions-for-project" class="anchor" href="#instructions-for-project" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path></svg></a>Instructions for project</h2>
+
+<blockquote>
+<p>The purpose of this project is to demonstrate your ability to collect, work with, and clean a data set. The goal is to prepare tidy data that can be used for later analysis. You will be graded by your peers on a series of yes/no questions related to the project. You will be required to submit: 1) a tidy data set as described below, 2) a link to a Github repository with your script for performing the analysis, and 3) a code book that describes the variables, the data, and any transformations or work that you performed to clean up the data called CodeBook.md. You should also include a README.md in the repo with your scripts. This repo explains how all of the scripts work and how they are connected.  </p>
+
+<p>One of the most exciting areas in all of data science right now is wearable computing - see for example this article . Companies like Fitbit, Nike, and Jawbone Up are racing to develop the most advanced algorithms to attract new users. The data linked to from the course website represent data collected from the accelerometers from the Samsung Galaxy S smartphone. A full description is available at the site where the data was obtained: </p>
+
+<p><a href="http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones">http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones</a> </p>
+
+<p>Here are the data for the project: </p>
+
+<p><a href="https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip">https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip</a> </p>
+
+<p>You should create one R script called run_analysis.R that does the following. </p>
+
+<ol>
+<li><strong>DONE</strong> Merges the training and the test sets to create one data set.</li>
+<li><strong>DONE</strong> Extracts only the measurements on the mean and standard deviation for each measurement.</li>
+<li><strong>DONE</strong> Uses descriptive activity names to name the activities in the data set.</li>
+<li><strong>DONE</strong> Appropriately labels the data set with descriptive activity names.</li>
+<li><strong>DONE</strong> Creates a second, independent tidy data set with the average of each variable for each activity and each subject. </li>
+</ol>
+
+<p>Good luck!</p>
+</blockquote>
+
+<p><strong>The codebook is at the end of this document.</strong></p>
+
+<h2><a id="user-content-preliminaries" class="anchor" href="#preliminaries" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path></svg></a>Preliminaries</h2>
+
+<p>Load packages.</p>
+
+<div class="highlight highlight-source-r"><pre><span class="pl-smi">packages</span> <span class="pl-k">&lt;-</span> c(<span class="pl-s"><span class="pl-pds">"</span>data.table<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>reshape2<span class="pl-pds">"</span></span>)
+sapply(<span class="pl-smi">packages</span>, <span class="pl-smi">require</span>, <span class="pl-v">character.only</span><span class="pl-k">=</span><span class="pl-c1">TRUE</span>, <span class="pl-v">quietly</span><span class="pl-k">=</span><span class="pl-c1">TRUE</span>)</pre></div>
+
+<p>Set path.</p>
+
+<div class="highlight highlight-source-r"><pre><span class="pl-smi">path</span> <span class="pl-k">&lt;-</span> getwd()
+<span class="pl-smi">path</span></pre></div>
+
+<h2><a id="user-content-get-the-data" class="anchor" href="#get-the-data" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path></svg></a>Get the data</h2>
+
+<p>Download the file. Put it in the <code>Data</code> folder. <strong>This was already done on 2014-04-11; save time and don&rsquo;t evaluate again.</strong></p>
+
+<div class="highlight highlight-source-r"><pre><span class="pl-smi">url</span> <span class="pl-k">&lt;-</span> <span class="pl-s"><span class="pl-pds">"</span>https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip<span class="pl-pds">"</span></span>
+<span class="pl-smi">f</span> <span class="pl-k">&lt;-</span> <span class="pl-s"><span class="pl-pds">"</span>Dataset.zip<span class="pl-pds">"</span></span>
+<span class="pl-k">if</span> (<span class="pl-k">!</span>file.exists(<span class="pl-smi">path</span>)) {dir.create(<span class="pl-smi">path</span>)}
+download.file(<span class="pl-smi">url</span>, file.path(<span class="pl-smi">path</span>, <span class="pl-smi">f</span>))</pre></div>
+
+<p>Unzip the file. <strong>This was already done on 2014-04-11; save time and don&rsquo;t evaluate again.</strong></p>
+
+<div class="highlight highlight-source-r"><pre><span class="pl-smi">executable</span> <span class="pl-k">&lt;-</span> file.path(<span class="pl-s"><span class="pl-pds">"</span>C:<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>Program Files (x86)<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>7-Zip<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>7z.exe<span class="pl-pds">"</span></span>)
+<span class="pl-smi">parameters</span> <span class="pl-k">&lt;-</span> <span class="pl-s"><span class="pl-pds">"</span>x<span class="pl-pds">"</span></span>
+<span class="pl-smi">cmd</span> <span class="pl-k">&lt;-</span> paste(paste0(<span class="pl-s"><span class="pl-pds">"</span><span class="pl-cce">\"</span><span class="pl-pds">"</span></span>, <span class="pl-smi">executable</span>, <span class="pl-s"><span class="pl-pds">"</span><span class="pl-cce">\"</span><span class="pl-pds">"</span></span>), <span class="pl-smi">parameters</span>, paste0(<span class="pl-s"><span class="pl-pds">"</span><span class="pl-cce">\"</span><span class="pl-pds">"</span></span>, file.path(<span class="pl-smi">path</span>, <span class="pl-smi">f</span>), <span class="pl-s"><span class="pl-pds">"</span><span class="pl-cce">\"</span><span class="pl-pds">"</span></span>))
+system(<span class="pl-smi">cmd</span>)</pre></div>
+
+<p>The archive put the files in a folder named <code>UCI HAR Dataset</code>. Set this folder as the input path. List the files here.</p>
+
+<div class="highlight highlight-source-r"><pre><span class="pl-smi">pathIn</span> <span class="pl-k">&lt;-</span> file.path(<span class="pl-smi">path</span>, <span class="pl-s"><span class="pl-pds">"</span>UCI HAR Dataset<span class="pl-pds">"</span></span>)
+list.files(<span class="pl-smi">pathIn</span>, <span class="pl-v">recursive</span><span class="pl-k">=</span><span class="pl-c1">TRUE</span>)</pre></div>
+
+<p><strong>See the <code>README.txt</code> file in <code>r path</code> for detailed information on the dataset.</strong></p>
+
+<p>For the purposes of this project, the files in the <code>Inertial Signals</code> folders are not used.</p>
+
+<h2><a id="user-content-read-the-files" class="anchor" href="#read-the-files" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path></svg></a>Read the files</h2>
+
+<p>Read the subject files.</p>
+
+<div class="highlight highlight-source-r"><pre><span class="pl-smi">dtSubjectTrain</span> <span class="pl-k">&lt;-</span> fread(file.path(<span class="pl-smi">pathIn</span>, <span class="pl-s"><span class="pl-pds">"</span>train<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>subject_train.txt<span class="pl-pds">"</span></span>))
+<span class="pl-smi">dtSubjectTest</span>  <span class="pl-k">&lt;-</span> fread(file.path(<span class="pl-smi">pathIn</span>, <span class="pl-s"><span class="pl-pds">"</span>test<span class="pl-pds">"</span></span> , <span class="pl-s"><span class="pl-pds">"</span>subject_test.txt<span class="pl-pds">"</span></span> ))</pre></div>
+
+<p>Read the activity files. For some reason, these are called <em>label</em> files in the <code>README.txt</code> documentation.</p>
+
+<div class="highlight highlight-source-r"><pre><span class="pl-smi">dtActivityTrain</span> <span class="pl-k">&lt;-</span> fread(file.path(<span class="pl-smi">pathIn</span>, <span class="pl-s"><span class="pl-pds">"</span>train<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>Y_train.txt<span class="pl-pds">"</span></span>))
+<span class="pl-smi">dtActivityTest</span>  <span class="pl-k">&lt;-</span> fread(file.path(<span class="pl-smi">pathIn</span>, <span class="pl-s"><span class="pl-pds">"</span>test<span class="pl-pds">"</span></span> , <span class="pl-s"><span class="pl-pds">"</span>Y_test.txt<span class="pl-pds">"</span></span> ))</pre></div>
+
+<p>Read the data files. <code>fread</code> seems to be giving me some trouble reading files. Using a helper function, read the file with <code>read.table</code> instead, then convert the resulting data frame to a data table. Return the data table.</p>
+
+<div class="highlight highlight-source-r"><pre><span class="pl-en">fileToDataTable</span> <span class="pl-k">&lt;-</span> <span class="pl-k">function</span> (<span class="pl-smi">f</span>) {
+    <span class="pl-smi">df</span> <span class="pl-k">&lt;-</span> read.table(<span class="pl-smi">f</span>)
+    <span class="pl-smi">dt</span> <span class="pl-k">&lt;-</span> data.table(<span class="pl-smi">df</span>)
+}
+<span class="pl-smi">dtTrain</span> <span class="pl-k">&lt;-</span> fileToDataTable(file.path(<span class="pl-smi">pathIn</span>, <span class="pl-s"><span class="pl-pds">"</span>train<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>X_train.txt<span class="pl-pds">"</span></span>))
+<span class="pl-smi">dtTest</span>  <span class="pl-k">&lt;-</span> fileToDataTable(file.path(<span class="pl-smi">pathIn</span>, <span class="pl-s"><span class="pl-pds">"</span>test<span class="pl-pds">"</span></span> , <span class="pl-s"><span class="pl-pds">"</span>X_test.txt<span class="pl-pds">"</span></span> ))</pre></div>
+
+<h2><a id="user-content-merge-the-training-and-the-test-sets" class="anchor" href="#merge-the-training-and-the-test-sets" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path></svg></a>Merge the training and the test sets</h2>
+
+<p>Concatenate the data tables.</p>
+
+<div class="highlight highlight-source-r"><pre><span class="pl-smi">dtSubject</span> <span class="pl-k">&lt;-</span> rbind(<span class="pl-smi">dtSubjectTrain</span>, <span class="pl-smi">dtSubjectTest</span>)
+setnames(<span class="pl-smi">dtSubject</span>, <span class="pl-s"><span class="pl-pds">"</span>V1<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>subject<span class="pl-pds">"</span></span>)
+<span class="pl-smi">dtActivity</span> <span class="pl-k">&lt;-</span> rbind(<span class="pl-smi">dtActivityTrain</span>, <span class="pl-smi">dtActivityTest</span>)
+setnames(<span class="pl-smi">dtActivity</span>, <span class="pl-s"><span class="pl-pds">"</span>V1<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>activityNum<span class="pl-pds">"</span></span>)
+<span class="pl-smi">dt</span> <span class="pl-k">&lt;-</span> rbind(<span class="pl-smi">dtTrain</span>, <span class="pl-smi">dtTest</span>)</pre></div>
+
+<p>Merge columns.</p>
+
+<div class="highlight highlight-source-r"><pre><span class="pl-smi">dtSubject</span> <span class="pl-k">&lt;-</span> cbind(<span class="pl-smi">dtSubject</span>, <span class="pl-smi">dtActivity</span>)
+<span class="pl-smi">dt</span> <span class="pl-k">&lt;-</span> cbind(<span class="pl-smi">dtSubject</span>, <span class="pl-smi">dt</span>)</pre></div>
+
+<p>Set key.</p>
+
+<div class="highlight highlight-source-r"><pre>setkey(<span class="pl-smi">dt</span>, <span class="pl-smi">subject</span>, <span class="pl-smi">activityNum</span>)</pre></div>
+
+<h2><a id="user-content-extract-only-the-mean-and-standard-deviation" class="anchor" href="#extract-only-the-mean-and-standard-deviation" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path></svg></a>Extract only the mean and standard deviation</h2>
+
+<p>Read the <code>features.txt</code> file. This tells which variables in <code>dt</code> are measurements for the mean and standard deviation.</p>
+
+<div class="highlight highlight-source-r"><pre><span class="pl-smi">dtFeatures</span> <span class="pl-k">&lt;-</span> fread(file.path(<span class="pl-smi">pathIn</span>, <span class="pl-s"><span class="pl-pds">"</span>features.txt<span class="pl-pds">"</span></span>))
+setnames(<span class="pl-smi">dtFeatures</span>, names(<span class="pl-smi">dtFeatures</span>), c(<span class="pl-s"><span class="pl-pds">"</span>featureNum<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>featureName<span class="pl-pds">"</span></span>))</pre></div>
+
+<p>Subset only measurements for the mean and standard deviation.</p>
+
+<div class="highlight highlight-source-r"><pre><span class="pl-smi">dtFeatures</span> <span class="pl-k">&lt;-</span> <span class="pl-smi">dtFeatures</span>[grepl(<span class="pl-s"><span class="pl-pds">"</span>mean<span class="pl-cce">\\</span>(<span class="pl-cce">\\</span>)|std<span class="pl-cce">\\</span>(<span class="pl-cce">\\</span>)<span class="pl-pds">"</span></span>, <span class="pl-smi">featureName</span>)]</pre></div>
+
+<p>Convert the column numbers to a vector of variable names matching columns in <code>dt</code>.</p>
+
+<div class="highlight highlight-source-r"><pre><span class="pl-smi">dtFeatures</span><span class="pl-k">$</span><span class="pl-smi">featureCode</span> <span class="pl-k">&lt;-</span> <span class="pl-smi">dtFeatures</span>[, paste0(<span class="pl-s"><span class="pl-pds">"</span>V<span class="pl-pds">"</span></span>, <span class="pl-smi">featureNum</span>)]
+head(<span class="pl-smi">dtFeatures</span>)
+<span class="pl-smi">dtFeatures</span><span class="pl-k">$</span><span class="pl-smi">featureCode</span></pre></div>
+
+<p>Subset these variables using variable names.</p>
+
+<div class="highlight highlight-source-r"><pre><span class="pl-smi">select</span> <span class="pl-k">&lt;-</span> c(key(<span class="pl-smi">dt</span>), <span class="pl-smi">dtFeatures</span><span class="pl-k">$</span><span class="pl-smi">featureCode</span>)
+<span class="pl-smi">dt</span> <span class="pl-k">&lt;-</span> <span class="pl-smi">dt</span>[, <span class="pl-smi">select</span>, <span class="pl-v">with</span><span class="pl-k">=</span><span class="pl-c1">FALSE</span>]</pre></div>
+
+<h2><a id="user-content-use-descriptive-activity-names" class="anchor" href="#use-descriptive-activity-names" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path></svg></a>Use descriptive activity names</h2>
+
+<p>Read <code>activity_labels.txt</code> file. This will be used to add descriptive names to the activities.</p>
+
+<div class="highlight highlight-source-r"><pre><span class="pl-smi">dtActivityNames</span> <span class="pl-k">&lt;-</span> fread(file.path(<span class="pl-smi">pathIn</span>, <span class="pl-s"><span class="pl-pds">"</span>activity_labels.txt<span class="pl-pds">"</span></span>))
+setnames(<span class="pl-smi">dtActivityNames</span>, names(<span class="pl-smi">dtActivityNames</span>), c(<span class="pl-s"><span class="pl-pds">"</span>activityNum<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>activityName<span class="pl-pds">"</span></span>))</pre></div>
+
+<h2><a id="user-content-label-with-descriptive-activity-names" class="anchor" href="#label-with-descriptive-activity-names" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path></svg></a>Label with descriptive activity names</h2>
+
+<p>Merge activity labels.</p>
+
+<div class="highlight highlight-source-r"><pre><span class="pl-smi">dt</span> <span class="pl-k">&lt;-</span> merge(<span class="pl-smi">dt</span>, <span class="pl-smi">dtActivityNames</span>, <span class="pl-v">by</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>activityNum<span class="pl-pds">"</span></span>, <span class="pl-v">all.x</span><span class="pl-k">=</span><span class="pl-c1">TRUE</span>)</pre></div>
+
+<p>Add <code>activityName</code> as a key.</p>
+
+<div class="highlight highlight-source-r"><pre>setkey(<span class="pl-smi">dt</span>, <span class="pl-smi">subject</span>, <span class="pl-smi">activityNum</span>, <span class="pl-smi">activityName</span>)</pre></div>
+
+<p>Melt the data table to reshape it from a short and wide format to a tall and narrow format.</p>
+
+<div class="highlight highlight-source-r"><pre><span class="pl-smi">dt</span> <span class="pl-k">&lt;-</span> data.table(melt(<span class="pl-smi">dt</span>, key(<span class="pl-smi">dt</span>), <span class="pl-v">variable.name</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>featureCode<span class="pl-pds">"</span></span>))</pre></div>
+
+<p>Merge activity name.</p>
+
+<div class="highlight highlight-source-r"><pre><span class="pl-smi">dt</span> <span class="pl-k">&lt;-</span> merge(<span class="pl-smi">dt</span>, <span class="pl-smi">dtFeatures</span>[, <span class="pl-k">list</span>(<span class="pl-smi">featureNum</span>, <span class="pl-smi">featureCode</span>, <span class="pl-smi">featureName</span>)], <span class="pl-v">by</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>featureCode<span class="pl-pds">"</span></span>, <span class="pl-v">all.x</span><span class="pl-k">=</span><span class="pl-c1">TRUE</span>)</pre></div>
+
+<p>Create a new variable, <code>activity</code> that is equivalent to <code>activityName</code> as a factor class.
+Create a new variable, <code>feature</code> that is equivalent to <code>featureName</code> as a factor class.</p>
+
+<div class="highlight highlight-source-r"><pre><span class="pl-smi">dt</span><span class="pl-k">$</span><span class="pl-smi">activity</span> <span class="pl-k">&lt;-</span> <span class="pl-k">factor</span>(<span class="pl-smi">dt</span><span class="pl-k">$</span><span class="pl-smi">activityName</span>)
+<span class="pl-smi">dt</span><span class="pl-k">$</span><span class="pl-smi">feature</span> <span class="pl-k">&lt;-</span> <span class="pl-k">factor</span>(<span class="pl-smi">dt</span><span class="pl-k">$</span><span class="pl-smi">featureName</span>)</pre></div>
+
+<p>Seperate features from <code>featureName</code> using the helper function <code>grepthis</code>.</p>
+
+<div class="highlight highlight-source-r"><pre><span class="pl-en">grepthis</span> <span class="pl-k">&lt;-</span> <span class="pl-k">function</span> (<span class="pl-smi">regex</span>) {
+  grepl(<span class="pl-smi">regex</span>, <span class="pl-smi">dt</span><span class="pl-k">$</span><span class="pl-smi">feature</span>)
+}
+<span class="pl-c">## Features with 2 categories</span>
+<span class="pl-smi">n</span> <span class="pl-k">&lt;-</span> <span class="pl-c1">2</span>
+<span class="pl-smi">y</span> <span class="pl-k">&lt;-</span> <span class="pl-k">matrix</span>(seq(<span class="pl-c1">1</span>, <span class="pl-smi">n</span>), <span class="pl-v">nrow</span><span class="pl-k">=</span><span class="pl-smi">n</span>)
+<span class="pl-smi">x</span> <span class="pl-k">&lt;-</span> <span class="pl-k">matrix</span>(c(grepthis(<span class="pl-s"><span class="pl-pds">"</span>^t<span class="pl-pds">"</span></span>), grepthis(<span class="pl-s"><span class="pl-pds">"</span>^f<span class="pl-pds">"</span></span>)), <span class="pl-v">ncol</span><span class="pl-k">=</span>nrow(<span class="pl-smi">y</span>))
+<span class="pl-smi">dt</span><span class="pl-k">$</span><span class="pl-smi">featDomain</span> <span class="pl-k">&lt;-</span> <span class="pl-k">factor</span>(<span class="pl-smi">x</span> <span class="pl-k">%*%</span> <span class="pl-smi">y</span>, <span class="pl-v">labels</span><span class="pl-k">=</span>c(<span class="pl-s"><span class="pl-pds">"</span>Time<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>Freq<span class="pl-pds">"</span></span>))
+<span class="pl-smi">x</span> <span class="pl-k">&lt;-</span> <span class="pl-k">matrix</span>(c(grepthis(<span class="pl-s"><span class="pl-pds">"</span>Acc<span class="pl-pds">"</span></span>), grepthis(<span class="pl-s"><span class="pl-pds">"</span>Gyro<span class="pl-pds">"</span></span>)), <span class="pl-v">ncol</span><span class="pl-k">=</span>nrow(<span class="pl-smi">y</span>))
+<span class="pl-smi">dt</span><span class="pl-k">$</span><span class="pl-smi">featInstrument</span> <span class="pl-k">&lt;-</span> <span class="pl-k">factor</span>(<span class="pl-smi">x</span> <span class="pl-k">%*%</span> <span class="pl-smi">y</span>, <span class="pl-v">labels</span><span class="pl-k">=</span>c(<span class="pl-s"><span class="pl-pds">"</span>Accelerometer<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>Gyroscope<span class="pl-pds">"</span></span>))
+<span class="pl-smi">x</span> <span class="pl-k">&lt;-</span> <span class="pl-k">matrix</span>(c(grepthis(<span class="pl-s"><span class="pl-pds">"</span>BodyAcc<span class="pl-pds">"</span></span>), grepthis(<span class="pl-s"><span class="pl-pds">"</span>GravityAcc<span class="pl-pds">"</span></span>)), <span class="pl-v">ncol</span><span class="pl-k">=</span>nrow(<span class="pl-smi">y</span>))
+<span class="pl-smi">dt</span><span class="pl-k">$</span><span class="pl-smi">featAcceleration</span> <span class="pl-k">&lt;-</span> <span class="pl-k">factor</span>(<span class="pl-smi">x</span> <span class="pl-k">%*%</span> <span class="pl-smi">y</span>, <span class="pl-v">labels</span><span class="pl-k">=</span>c(<span class="pl-c1">NA</span>, <span class="pl-s"><span class="pl-pds">"</span>Body<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>Gravity<span class="pl-pds">"</span></span>))
+<span class="pl-smi">x</span> <span class="pl-k">&lt;-</span> <span class="pl-k">matrix</span>(c(grepthis(<span class="pl-s"><span class="pl-pds">"</span>mean()<span class="pl-pds">"</span></span>), grepthis(<span class="pl-s"><span class="pl-pds">"</span>std()<span class="pl-pds">"</span></span>)), <span class="pl-v">ncol</span><span class="pl-k">=</span>nrow(<span class="pl-smi">y</span>))
+<span class="pl-smi">dt</span><span class="pl-k">$</span><span class="pl-smi">featVariable</span> <span class="pl-k">&lt;-</span> <span class="pl-k">factor</span>(<span class="pl-smi">x</span> <span class="pl-k">%*%</span> <span class="pl-smi">y</span>, <span class="pl-v">labels</span><span class="pl-k">=</span>c(<span class="pl-s"><span class="pl-pds">"</span>Mean<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>SD<span class="pl-pds">"</span></span>))
+<span class="pl-c">## Features with 1 category</span>
+<span class="pl-smi">dt</span><span class="pl-k">$</span><span class="pl-smi">featJerk</span> <span class="pl-k">&lt;-</span> <span class="pl-k">factor</span>(grepthis(<span class="pl-s"><span class="pl-pds">"</span>Jerk<span class="pl-pds">"</span></span>), <span class="pl-v">labels</span><span class="pl-k">=</span>c(<span class="pl-c1">NA</span>, <span class="pl-s"><span class="pl-pds">"</span>Jerk<span class="pl-pds">"</span></span>))
+<span class="pl-smi">dt</span><span class="pl-k">$</span><span class="pl-smi">featMagnitude</span> <span class="pl-k">&lt;-</span> <span class="pl-k">factor</span>(grepthis(<span class="pl-s"><span class="pl-pds">"</span>Mag<span class="pl-pds">"</span></span>), <span class="pl-v">labels</span><span class="pl-k">=</span>c(<span class="pl-c1">NA</span>, <span class="pl-s"><span class="pl-pds">"</span>Magnitude<span class="pl-pds">"</span></span>))
+<span class="pl-c">## Features with 3 categories</span>
+<span class="pl-smi">n</span> <span class="pl-k">&lt;-</span> <span class="pl-c1">3</span>
+<span class="pl-smi">y</span> <span class="pl-k">&lt;-</span> <span class="pl-k">matrix</span>(seq(<span class="pl-c1">1</span>, <span class="pl-smi">n</span>), <span class="pl-v">nrow</span><span class="pl-k">=</span><span class="pl-smi">n</span>)
+<span class="pl-smi">x</span> <span class="pl-k">&lt;-</span> <span class="pl-k">matrix</span>(c(grepthis(<span class="pl-s"><span class="pl-pds">"</span>-X<span class="pl-pds">"</span></span>), grepthis(<span class="pl-s"><span class="pl-pds">"</span>-Y<span class="pl-pds">"</span></span>), grepthis(<span class="pl-s"><span class="pl-pds">"</span>-Z<span class="pl-pds">"</span></span>)), <span class="pl-v">ncol</span><span class="pl-k">=</span>nrow(<span class="pl-smi">y</span>))
+<span class="pl-smi">dt</span><span class="pl-k">$</span><span class="pl-smi">featAxis</span> <span class="pl-k">&lt;-</span> <span class="pl-k">factor</span>(<span class="pl-smi">x</span> <span class="pl-k">%*%</span> <span class="pl-smi">y</span>, <span class="pl-v">labels</span><span class="pl-k">=</span>c(<span class="pl-c1">NA</span>, <span class="pl-s"><span class="pl-pds">"</span>X<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>Y<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>Z<span class="pl-pds">"</span></span>))</pre></div>
+
+<p>Check to make sure all possible combinations of <code>feature</code> are accounted for by all possible combinations of the factor class variables.</p>
+
+<div class="highlight highlight-source-r"><pre><span class="pl-smi">r1</span> <span class="pl-k">&lt;-</span> nrow(<span class="pl-smi">dt</span>[, .<span class="pl-smi">N</span>, <span class="pl-v">by</span><span class="pl-k">=</span>c(<span class="pl-s"><span class="pl-pds">"</span>feature<span class="pl-pds">"</span></span>)])
+<span class="pl-smi">r2</span> <span class="pl-k">&lt;-</span> nrow(<span class="pl-smi">dt</span>[, .<span class="pl-smi">N</span>, <span class="pl-v">by</span><span class="pl-k">=</span>c(<span class="pl-s"><span class="pl-pds">"</span>featDomain<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>featAcceleration<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>featInstrument<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>featJerk<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>featMagnitude<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>featVariable<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>featAxis<span class="pl-pds">"</span></span>)])
+<span class="pl-smi">r1</span> <span class="pl-k">==</span> <span class="pl-smi">r2</span></pre></div>
+
+<p>Yes, I accounted for all possible combinations. <code>feature</code> is now redundant.</p>
+
+<h2><a id="user-content-create-a-tidy-data-set" class="anchor" href="#create-a-tidy-data-set" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path></svg></a>Create a tidy data set</h2>
+
+<p>Create a data set with the average of each variable for each activity and each subject.</p>
+
+<div class="highlight highlight-source-r"><pre>setkey(<span class="pl-smi">dt</span>, <span class="pl-smi">subject</span>, <span class="pl-smi">activity</span>, <span class="pl-smi">featDomain</span>, <span class="pl-smi">featAcceleration</span>, <span class="pl-smi">featInstrument</span>, <span class="pl-smi">featJerk</span>, <span class="pl-smi">featMagnitude</span>, <span class="pl-smi">featVariable</span>, <span class="pl-smi">featAxis</span>)
+<span class="pl-smi">dtTidy</span> <span class="pl-k">&lt;-</span> <span class="pl-smi">dt</span>[, <span class="pl-k">list</span>(<span class="pl-v">count</span> <span class="pl-k">=</span> .<span class="pl-smi">N</span>, <span class="pl-v">average</span> <span class="pl-k">=</span> mean(<span class="pl-smi">value</span>)), <span class="pl-v">by</span><span class="pl-k">=</span>key(<span class="pl-smi">dt</span>)]</pre></div>
+
+<p>Make codebook.</p>
+
+<div class="highlight highlight-source-r"><pre>knit(<span class="pl-s"><span class="pl-pds">"</span>makeCodebook.Rmd<span class="pl-pds">"</span></span>, <span class="pl-v">output</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>codebook.md<span class="pl-pds">"</span></span>, <span class="pl-v">encoding</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>ISO8859-1<span class="pl-pds">"</span></span>, <span class="pl-v">quiet</span><span class="pl-k">=</span><span class="pl-c1">TRUE</span>)
+markdownToHTML(<span class="pl-s"><span class="pl-pds">"</span>codebook.md<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>codebook.html<span class="pl-pds">"</span></span>)</pre></div>
+</article>
+  </div>
+
+</div>
+
+<p><button type="button" data-facebox="#jump-to-line" data-facebox-class="linejump" data-hotkey="l" class="hidden">Jump to Line</button></p>
+
+<div id="jump-to-line" style="display:none">
+  <!-- </textarea> &ndash;><!-- '"` --><form accept-charset="UTF-8" action="" class="js-jump-to-line-form" method="get"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /></div>
+    <input class="form-control linejump-input js-jump-to-line-field" type="text" placeholder="Jump to line&hellip;" aria-label="Jump to line" autofocus>
+    <button type="submit" class="btn">Go</button>
+</form></div>
+
+  </div>
+  <div class="modal-backdrop"></div>
+</div>
+
+<pre><code>&lt;/div&gt;
+</code></pre>
+
+<p></div></p>
+
+<pre><code>&lt;/div&gt;
+
+    &lt;div class=&quot;container site-footer-container&quot;&gt;
+</code></pre>
+
+<p><div class="site-footer" role="contentinfo">
+    <ul class="site-footer-links right">
+        <li><a href="https://status.github.com/" data-ga-click="Footer, go to status, text:status">Status</a></li>
+      <li><a href="https://developer.github.com" data-ga-click="Footer, go to api, text:api">API</a></li>
+      <li><a href="https://training.github.com" data-ga-click="Footer, go to training, text:training">Training</a></li>
+      <li><a href="https://shop.github.com" data-ga-click="Footer, go to shop, text:shop">Shop</a></li>
+        <li><a href="https://github.com/blog" data-ga-click="Footer, go to blog, text:blog">Blog</a></li>
+        <li><a href="https://github.com/about" data-ga-click="Footer, go to about, text:about">About</a></li></p>
+
+<pre><code>&lt;/ul&gt;
+
+&lt;a href=&quot;https://github.com&quot; aria-label=&quot;Homepage&quot; class=&quot;site-footer-mark&quot; title=&quot;GitHub&quot;&gt;
+  &lt;svg aria-hidden=&quot;true&quot; class=&quot;octicon octicon-mark-github&quot; height=&quot;24&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;24&quot;&gt;&lt;path d=&quot;M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59 0.4 0.07 0.55-0.17 0.55-0.38 0-0.19-0.01-0.82-0.01-1.49-2.01 0.37-2.53-0.49-2.69-0.94-0.09-0.23-0.48-0.94-0.82-1.13-0.28-0.15-0.68-0.52-0.01-0.53 0.63-0.01 1.08 0.58 1.23 0.82 0.72 1.21 1.87 0.87 2.33 0.66 0.07-0.52 0.28-0.87 0.51-1.07-1.78-0.2-3.64-0.89-3.64-3.95 0-0.87 0.31-1.59 0.82-2.15-0.08-0.2-0.36-1.02 0.08-2.12 0 0 0.67-0.21 2.2 0.82 0.64-0.18 1.32-0.27 2-0.27 0.68 0 1.36 0.09 2 0.27 1.53-1.04 2.2-0.82 2.2-0.82 0.44 1.1 0.16 1.92 0.08 2.12 0.51 0.56 0.82 1.27 0.82 2.15 0 3.07-1.87 3.75-3.65 3.95 0.29 0.25 0.54 0.73 0.54 1.48 0 1.07-0.01 1.93-0.01 2.2 0 0.21 0.15 0.46 0.55 0.38C13.71 14.53 16 11.53 16 8 16 3.58 12.42 0 8 0z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;
+</code></pre>
+
+<p></a>
+    <ul class="site-footer-links">
+      <li>&copy; 2016 <span title="0.04617s from github-fe150-cp1-prd.iad.github.net">GitHub</span>, Inc.</li>
+        <li><a href="https://github.com/site/terms" data-ga-click="Footer, go to terms, text:terms">Terms</a></li>
+        <li><a href="https://github.com/site/privacy" data-ga-click="Footer, go to privacy, text:privacy">Privacy</a></li>
+        <li><a href="https://github.com/security" data-ga-click="Footer, go to security, text:security">Security</a></li>
+        <li><a href="https://github.com/contact" data-ga-click="Footer, go to contact, text:contact">Contact</a></li>
+        <li><a href="https://help.github.com" data-ga-click="Footer, go to help, text:help">Help</a></li>
+    </ul>
+  </div>
+</div></p>
+
+<pre><code>&lt;div id=&quot;ajax-error-message&quot; class=&quot;ajax-error-message flash flash-error&quot;&gt;
+  &lt;svg aria-hidden=&quot;true&quot; class=&quot;octicon octicon-alert&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path d=&quot;M15.72 12.5l-6.85-11.98C8.69 0.21 8.36 0.02 8 0.02s-0.69 0.19-0.87 0.5l-6.85 11.98c-0.18 0.31-0.18 0.69 0 1C0.47 13.81 0.8 14 1.15 14h13.7c0.36 0 0.69-0.19 0.86-0.5S15.89 12.81 15.72 12.5zM9 12H7V10h2V12zM9 9H7V5h2V9z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;
+  &lt;button type=&quot;button&quot; class=&quot;flash-close js-flash-close js-ajax-error-dismiss&quot; aria-label=&quot;Dismiss error&quot;&gt;
+    &lt;svg aria-hidden=&quot;true&quot; class=&quot;octicon octicon-x&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 12 16&quot; width=&quot;12&quot;&gt;&lt;path d=&quot;M7.48 8l3.75 3.75-1.48 1.48-3.75-3.75-3.75 3.75-1.48-1.48 3.75-3.75L0.77 4.25l1.48-1.48 3.75 3.75 3.75-3.75 1.48 1.48-3.75 3.75z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;
+  &lt;/button&gt;
+  Something went wrong with that request. Please try again.
+&lt;/div&gt;
+
+
+
+  &lt;script crossorigin=&quot;anonymous&quot; integrity=&quot;sha256-4uyi3wBCkx9VD1mDG11JLFwnloJ5fDExqZzUPD8JF9M=&quot; src=&quot;https://assets-cdn.github.com/assets/frameworks-e2eca2df0042931f550f59831b5d492c5c279682797c3131a99cd43c3f0917d3.js&quot;&gt;&lt;/script&gt;
+  &lt;script async=&quot;async&quot; crossorigin=&quot;anonymous&quot; integrity=&quot;sha256-LkOzPIQQcypie7rwV1frNYTsnPeodH9GzNIzaigiP2A=&quot; src=&quot;https://assets-cdn.github.com/assets/github-2e43b33c8410732a627bbaf05757eb3584ec9cf7a8747f46ccd2336a28223f60.js&quot;&gt;&lt;/script&gt;
+
+
+
+
+
+
+&lt;div class=&quot;js-stale-session-flash stale-session-flash flash flash-warn flash-banner hidden&quot;&gt;
+  &lt;svg aria-hidden=&quot;true&quot; class=&quot;octicon octicon-alert&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path d=&quot;M15.72 12.5l-6.85-11.98C8.69 0.21 8.36 0.02 8 0.02s-0.69 0.19-0.87 0.5l-6.85 11.98c-0.18 0.31-0.18 0.69 0 1C0.47 13.81 0.8 14 1.15 14h13.7c0.36 0 0.69-0.19 0.86-0.5S15.89 12.81 15.72 12.5zM9 12H7V10h2V12zM9 9H7V5h2V9z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;
+  &lt;span class=&quot;signed-in-tab-flash&quot;&gt;You signed in with another tab or window. &lt;a href=&quot;&quot;&gt;Reload&lt;/a&gt; to refresh your session.&lt;/span&gt;
+  &lt;span class=&quot;signed-out-tab-flash&quot;&gt;You signed out in another tab or window. &lt;a href=&quot;&quot;&gt;Reload&lt;/a&gt; to refresh your session.&lt;/span&gt;
+&lt;/div&gt;
+&lt;div class=&quot;facebox&quot; id=&quot;facebox&quot; style=&quot;display:none;&quot;&gt;
+</code></pre>
+
+<p><div class="facebox-popup">
+    <div class="facebox-content" role="dialog" aria-labelledby="facebox-header" aria-describedby="facebox-description">
+    </div>
+    <button type="button" class="facebox-close js-facebox-close" aria-label="Close modal">
+      <svg aria-hidden="true" class="octicon octicon-x" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path d="M7.48 8l3.75 3.75-1.48 1.48-3.75-3.75-3.75 3.75-1.48-1.48 3.75-3.75L0.77 4.25l1.48-1.48 3.75 3.75 3.75-3.75 1.48 1.48-3.75 3.75z"></path></svg>
+    </button>
+  </div>
+</div></p>
+
+<p></body>
+</html></p>
+
+</body>
+
+</html>
